@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Play Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #f6f9fc, #d9e2ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        h3 {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎯 Will We Play Today?</h2>
+        <form method="POST" action="/predict"> 
+            <label for="day">Day:</label> 
+            <select name="day" required>
+                <option value="Sunny">Sunny</option>
+                <option value="Windy">Windy</option> 
+            </select>
+            
+            <label for="temperature">Temperature:</label> 
+            <select name="temperature" required>
+                <option value="Cool">Cool</option>
+                <option value="Hot">Hot</option>
+            </select>
+            
+            <input type="submit" value="Predict">
+        </form>
+        
+        {% if prediction_text %}
+            {% if "Not" in prediction_text %}
+                <h3 style="color: red;">{{ prediction_text }}</h3>
+            {% else %}
+                <h3 style="color: green;">{{ prediction_text }}</h3>
+            {% endif %}
+        {% endif %}
+    
+
+    </div>
+</body>
+</html>
